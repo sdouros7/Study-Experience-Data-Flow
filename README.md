@@ -1,18 +1,3 @@
-Of course. Those are excellent additions that show a much more integrated and collaborative process during the early phases. I have updated the diagram and the narrative to reflect these new connections.
-
-The changes incorporate:
-
-The approved budget from Phase 0 now informs all key systems in the Phase 1 design loop.
-
-A direct link where Intelligent Trials utilizes FSP for financial estimates.
-
-A direct link where RBQM uses data from Intelligent Trials to better understand risks.
-
-Here is the updated version.
-
-The Revised Medidata Workflow Diagram (v4)
-Markdown
-
 ```mermaid
 graph TD
     subgraph "Phase 0: Long-Range Planning (2-5 Years Pre-Protocol)"
