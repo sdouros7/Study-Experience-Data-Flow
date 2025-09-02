@@ -24,3 +24,14 @@ graph TD
         IT -- Creates --> SiteList(Potential Site List);
         RBQM_Plan -- Creates --> RiskPlan(Risk Monitoring Plan);
     end
+
+    subgraph Phase 3: Study Startup
+        GCLM[Grants & Contracts <br> Lifecycle Manager]
+        CTMS_Startup[CTMS];
+        EDC_Build[EDC Build (Rave)];
+        SiteTemplate -- Feeds --> GCLM;
+        SiteList -- Feeds --> CTMS_Startup;
+        SoA -- Feeds --> EDC_Build;
+        GCLM -- Creates --> ExecutedContracts(Executed Budgets & CTAs);
+        EDC_Build -- Creates --> LiveEDC(Live Clinical Database);
+    end
