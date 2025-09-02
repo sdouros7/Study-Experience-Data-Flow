@@ -24,5 +24,3 @@ graph TD
         IT -- Creates --> SiteList(Potential Site List);
         RBQM_Plan -- Creates --> RiskPlan(Risk Monitoring Plan);
     end
-
-    Phase 1 --> Phase 2;
