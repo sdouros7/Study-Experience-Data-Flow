@@ -27,7 +27,7 @@ graph TD
 
     subgraph Phase 3: Study Startup
         GCLM[Grants & Contracts <br> Lifecycle Manager]
-        CTMS_Startup[CTMS]; Site
+        CTMS_Startup[CTMS]; Sit
         EDC_Build[EDC Build (Rave)];
         SiteTemplate -- Feeds --> GCLM;
         SiteList -- Feeds --> CTMS_Startup;
