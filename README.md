@@ -1,30 +1,24 @@
-Of course. Thank you for that incredibly detailed and insightful description of your process. This is a much more nuanced and realistic workflow.
-
-Based on your fluid and flexible vision, I have created a new, much more detailed diagram and an accompanying explanation. This version incorporates the pre-planning phase, the iterative design loop, the concept of a central "Digital Protocol," and the specific nuances of the study startup process.
-
-The Revised Medidata Workflow
-Here is the Mermaid diagram code that represents the workflow you described.
-
-Markdown
-
 ```mermaid
 graph TD
-    subgraph "Phase 0: Portfolio Planning (2-5 Years Pre-Study)"
-        FSP_Portfolio[Financial Scenario Planning] --> HighLevelBudget(High-Level Estimated Budget);
+    subgraph "Phase 0: Long-Range Planning (2-5 Years Pre-Protocol)"
+        FSP_LR[Financial Scenario Planning] -- Creates --> HighLevelBudget(High-Level Estimated Budget);
     end
 
     subgraph "Phase 1: Study Design (Iterative Loop)"
-        ProtoAuthor[Protocol & SOA Authoring];
-        ProtoAuthor -- Iteration 1..n --> FSP_Design[FSP for Design Impact];
-        ProtoAuthor -- Iteration 1..n --> IT_Design[Intelligent Trials for Feasibility];
-        ProtoAuthor -- Iteration 1..n --> RBQM_Design[RBQM for Risk Assessment];
-        FSP_Design -- Financial Feedback --> ProtoAuthor;
-        IT_Design -- Operational Feedback --> ProtoAuthor;
-        RBQM_Design -- Risk Feedback --> ProtoAuthor;
+        Designer[Designer <br> Protocol & SOA Authoring];
+        HighLevelBudget -- Informs --> Designer;
+        
+        Designer -- Iteration 1..n --> FSP_Design[FSP for Design Impact];
+        Designer -- Iteration 1..n --> IT_Design[Intelligent Trials for Feasibility];
+        Designer -- Iteration 1..n --> RBQM_Design[RBQM for Risk Assessment];
+        
+        FSP_Design -- Financial Feedback --> Designer;
+        IT_Design -- Operational Feedback --> Designer;
+        RBQM_Design -- Risk Feedback --> Designer;
     end
 
     subgraph "Phase 2: Protocol Finalization & Digitization"
-        ProtoAuthor --> ApprovedProtocol[Approved Protocol/SOA];
+        Designer -- Final Version --> ApprovedProtocol[Approved Protocol/SOA];
         ApprovedProtocol --> DigitalTeam[Digital Protocol Team];
         DigitalTeam -- Digitizes --> DigitalProtocol((Digital Protocol <br> Single Source of Truth));
     end
@@ -36,10 +30,10 @@ graph TD
         CTMS_Setup[CTMS Setup];
         ContractingApp{New Contracting App <br> Budget Negotiation & CTA Execution};
         
-        DigitalProtocol -- Informs --> GM;
-        DigitalProtocol -- Informs --> EDC_Build;
-        DigitalProtocol -- Informs --> CTMS_Setup;
-        DigitalProtocol -- Informs --> FSP_Detailed[FSP for Final Budget];
+        DigitalProtocol -- Populates --> GM;
+        DigitalProtocol -- Populates --> EDC_Build;
+        DigitalProtocol -- Populates --> CTMS_Setup;
+        DigitalProtocol -- Populates --> FSP_Detailed[FSP for Baseline Budget];
 
         GM -- Site Budget Template --> ContractingApp;
         ContractingApp -- Align Payment Schedule <--> EDC_Build;
@@ -68,5 +62,3 @@ graph TD
         RBQM_Exec -- Risk/Quality Data --> Dashboard;
         EDC_Exec -- Enrollment Data --> Dashboard;
     end
-
-    HighLevelBudget --> ProtoAuthor;
