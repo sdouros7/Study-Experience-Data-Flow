@@ -1,19 +1,43 @@
+Of course. Those are excellent additions that show a much more integrated and collaborative process during the early phases. I have updated the diagram and the narrative to reflect these new connections.
+
+The changes incorporate:
+
+The approved budget from Phase 0 now informs all key systems in the Phase 1 design loop.
+
+A direct link where Intelligent Trials utilizes FSP for financial estimates.
+
+A direct link where RBQM uses data from Intelligent Trials to better understand risks.
+
+Here is the updated version.
+
+The Revised Medidata Workflow Diagram (v4)
+Markdown
+
 ```mermaid
 graph TD
     subgraph "Phase 0: Long-Range Planning (2-5 Years Pre-Protocol)"
-        FSP_LR[Financial Scenario Planning] -- Creates --> HighLevelBudget(High-Level Estimated Budget);
+        FSP_LR[Financial Scenario Planning] -- Creates --> HighLevelBudget(Approved High-Level Budget);
     end
 
-    subgraph "Phase 1: Study Design (Iterative Loop)"
+    subgraph "Phase 1: Study Design (Iterative & Collaborative Loop)"
         Designer[Designer <br> Protocol & SOA Authoring];
-        HighLevelBudget -- Informs --> Designer;
         
-        Designer -- Iteration 1..n --> FSP_Design[FSP for Design Impact];
-        Designer -- Iteration 1..n --> IT_Design[Intelligent Trials for Feasibility];
-        Designer -- Iteration 1..n --> RBQM_Design[RBQM for Risk Assessment];
+        %% Budget is communicated to all key design tools
+        HighLevelBudget -- Informs/Constrains --> Designer;
+        HighLevelBudget -- Informs/Constrains --> FSP_Design[FSP for Design Impact];
+        HighLevelBudget -- Informs/Constrains --> IT_Design[Intelligent Trials for Feasibility];
+        HighLevelBudget -- Informs/Constrains --> RBQM_Design[RBQM for Risk Assessment];
+        
+        %% Iterative loop with internal collaboration
+        Designer -- Iteration 1..n --> FSP_Design;
+        Designer -- Iteration 1..n --> IT_Design;
+        Designer -- Iteration 1..n --> RBQM_Design;
+
+        FSP_Design -- Provides Financial Data --> IT_Design;
+        IT_Design -- Informs Risk Assessment --> RBQM_Design;
         
         FSP_Design -- Financial Feedback --> Designer;
-        IT_Design -- Operational Feedback --> Designer;
+        IT_Design -- Operational & Financial Feedback --> Designer;
         RBQM_Design -- Risk Feedback --> Designer;
     end
 
