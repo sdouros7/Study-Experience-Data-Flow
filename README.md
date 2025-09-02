@@ -39,25 +39,35 @@ graph TD
         ContractingApp -- Align Payment Schedule <--> EDC_Build;
         ContractingApp -- Creates --> ExecutedCTA[Executed CTA];
         ExecutedCTA --> CTARepo[CTA Repository];
-        CTARepo -. Alerts .-> SitePayments_Setup[Site Payments Setup];
-        CTARepo -. Alerts .-> GM;
+        CTARepo -. Alerts: Payment Rules .-> SitePayments_Setup[Site Payments Setup];
+        CTARepo -. Alerts: Final Terms .-> GM;
+        CTARepo -. Alerts: Final Visit Schedule .-> EDC_Build;
     end
 
     subgraph "Phase 4: Study Execution"
         EDC_Exec[EDC Data Capture];
-        SitePayments[Site & Patient Payments];
         RBQM_Exec[RBQM Monitoring];
         CTMS_Exec[CTMS Management];
         
-        EDC_Exec -- Triggers Payments --> SitePayments;
         EDC_Exec -- Feeds Live Data --> RBQM_Exec;
         EDC_Exec -- Feeds Live Data --> CTMS_Exec;
+
+        subgraph "Payment Sub-Process"
+            direction LR
+            ReceiveTrigger(1. Receive EDC Trigger);
+            MatchToCTA(2. Match Data to CTA);
+            Calculate(3. Calculate Payment);
+            Generate(4. Generate Invoice/Instruction);
+            Disburse(5. Disburse Funds);
+        end
+
+        EDC_Exec -- Subject Visit/Procedure Data --> ReceiveTrigger;
     end
 
     subgraph "Phase 5: Unified Oversight"
         Dashboard[Operational & Financial Dashboard];
         FSP_Detailed -- Financial Plan --> Dashboard;
-        SitePayments -- Financial Actuals --> Dashboard;
+        Disburse -- Financial Actuals --> Dashboard;
         CTMS_Exec -- Operational Data --> Dashboard;
         RBQM_Exec -- Risk/Quality Data --> Dashboard;
         EDC_Exec -- Enrollment Data --> Dashboard;
