@@ -6,6 +6,7 @@ graph TD
 
     subgraph "Phase 1: Study Design (Iterative & Collaborative Loop)"
         Designer[Designer <br> Protocol & SOA Authoring];
+        ForecastingEngine((Central Forecasting Engine));
         
         %% Budget is communicated to all key design tools
         HighLevelBudget -- Informs/Constrains --> Designer;
@@ -18,11 +19,18 @@ graph TD
         Designer -- Iteration 1..n --> IT_Design;
         Designer -- Iteration 1..n --> RBQM_Design;
 
+        %% Central Forecasting Engine Interactions
+        Designer -- Study Design Data --> ForecastingEngine;
+        IT_Design -- Feasibility Data --> ForecastingEngine;
+        ForecastingEngine -- Provides Algorithm/Forecast --> IT_Design;
+        ForecastingEngine -- Provides Algorithm/Forecast --> FSP_Design;
+        ForecastingEngine -- Creates --> EnrollmentForecast(Enrollment Forecast);
+
         FSP_Design -- Provides Financial Data --> IT_Design;
         IT_Design -- Informs Risk Assessment --> RBQM_Design;
         
         FSP_Design -- Financial Feedback --> Designer;
-        IT_Design -- Operational & Financial Feedback --> Designer;
+        IT_Design -- Operational Feedback --> Designer;
         RBQM_Design -- Risk Feedback --> Designer;
     end
 
@@ -43,6 +51,7 @@ graph TD
         DigitalProtocol -- Populates --> EDC_Build;
         DigitalProtocol -- Populates --> CTMS_Setup;
         DigitalProtocol -- Populates --> FSP_Detailed[FSP for Baseline Budget];
+        EnrollmentForecast -- Informs --> CTMS_Setup;
 
         GM -- Site Budget Template --> ContractingApp;
         ContractingApp -- Align Payment Schedule <--> EDC_Build;
